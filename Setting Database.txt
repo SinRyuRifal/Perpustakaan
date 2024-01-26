@@ -1,0 +1,3 @@
+String url = "jdbc:mysql://localhost:3306/perpussmakhadijah";
+String user = "root";
+String pass = "";
