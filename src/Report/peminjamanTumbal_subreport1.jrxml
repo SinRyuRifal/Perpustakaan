@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="peminjamanTumbal_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="0fa7cb93-5b61-47fb-a127-3ba46b021f13">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_PEMINJAMAN" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+    p.ID_PEMINJAMAN,
+    p.ID_PENJAGA,
+    p.NISN,
+    a.NAMA_ANGGOTA,
+    p.TANGGAL_PEMINJAMAN,
+    p.TANGGAL_PENGEMBALIAN,
+    p.STATUS_PEMINJAMAN,
+    p.JUMLAH_PINJAMAN,
+    dp.ID_BUKU,
+    e.ISBN,
+    b.JUDUL_BUKU,
+    pj.NAMA_PENJAGA
+FROM
+    peminjaman p
+    JOIN detail_peminjaman dp ON p.ID_PEMINJAMAN = dp.ID_PEMINJAMAN
+    JOIN entry e ON dp.ID_BUKU = e.ID_BUKU
+    JOIN buku b ON e.ISBN = b.ISBN
+    LEFT JOIN anggota a ON p.NISN = a.NISN
+    LEFT JOIN penjaga pj ON p.ID_PENJAGA = pj.ID_PENJAGA
+WHERE
+    p.ID_PEMINJAMAN = $P{ID_PEMINJAMAN}]]>
+	</queryString>
+	<field name="ID_PEMINJAMAN" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_PENJAGA" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NISN" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NAMA_ANGGOTA" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TANGGAL_PEMINJAMAN" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TANGGAL_PENGEMBALIAN" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="STATUS_PEMINJAMAN" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JUMLAH_PINJAMAN" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_BUKU" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ISBN" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JUDUL_BUKU" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NAMA_PENJAGA" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="64" y="48" width="100" height="20" uuid="520124c7-436e-4991-a5c1-87fe94ac7040"/>
+				<textFieldExpression><![CDATA[$F{ID_BUKU}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="193" y="48" width="100" height="20" uuid="0b50749a-ebf5-4069-bd3c-e8de72034830"/>
+				<textFieldExpression><![CDATA[$F{ISBN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="307" y="48" width="100" height="20" uuid="b3429ec2-6fc4-47e0-955d-d29cda3c4ccc"/>
+				<textFieldExpression><![CDATA[$F{JUDUL_BUKU}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

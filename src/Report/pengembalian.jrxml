@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="1000" pageHeight="842" columnWidth="960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1f0467cf-96aa-4f35-b507-d154c58201de">
+	<property name="ireport.zoom" value="3.4522712143931304"/>
+	<property name="ireport.x" value="2425"/>
+	<property name="ireport.y" value="372"/>
+	<parameter name="tgl1" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tgl2" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+    p.ID_PENGEMBALIAN,
+    p.ID_PENJAGA,
+    p.NISN,
+    a.NAMA_ANGGOTA,
+    pj.NAMA_PENJAGA,
+    p.TANGGAL_DIKEMBALIKAN,
+    p.TOTAL_DENDA,
+    dp.ID_DETAIL_PENGEMBALIAN,
+    dp.ID_BUKU,
+    b.JUDUL_BUKU,
+dp.SUBTOTAL_DENDA
+FROM
+    pengembalian p
+    INNER JOIN detail_pengembalian dp ON p.ID_PENGEMBALIAN = dp.ID_PENGEMBALIAN
+    LEFT JOIN anggota a ON p.NISN = a.NISN
+    LEFT JOIN penjaga pj ON p.ID_PENJAGA = pj.ID_PENJAGA
+    LEFT JOIN entry e ON dp.ID_BUKU = e.ID_BUKU
+    LEFT JOIN buku b ON e.ISBN = b.ISBN
+WHERE
+p.TANGGAL_DIKEMBALIKAN BETWEEN $P{tgl1} AND $P{tgl2};]]>
+	</queryString>
+	<field name="ID_PENGEMBALIAN" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_PENJAGA" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NISN" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NAMA_ANGGOTA" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NAMA_PENJAGA" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TANGGAL_DIKEMBALIKAN" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TOTAL_DENDA" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_DETAIL_PENGEMBALIAN" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_BUKU" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JUDUL_BUKU" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SUBTOTAL_DENDA" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="TOTAL_DENDA_1" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{TOTAL_DENDA}]]></variableExpression>
+	</variable>
+	<variable name="SUBTOTAL_DENDA_1" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{SUBTOTAL_DENDA}]]></variableExpression>
+	</variable>
+	<variable name="ID_PENGEMBALIAN_1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{ID_PENGEMBALIAN}]]></variableExpression>
+	</variable>
+	<variable name="ID_PENGEMBALIAN_2" class="java.lang.Integer" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{ID_PENGEMBALIAN}]]></variableExpression>
+	</variable>
+	<variable name="ID_PENGEMBALIAN_3" class="java.lang.Integer" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{ID_PENGEMBALIAN}]]></variableExpression>
+	</variable>
+	<variable name="ID_BUKU_1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{ID_BUKU}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="138" splitType="Stretch">
+			<image>
+				<reportElement x="165" y="36" width="75" height="76" uuid="dbb40a8c-13bf-4e81-b463-adc2fc8cba67"/>
+				<imageExpression><![CDATA["C:\\Users\\Rifal\\Dropbox\\PC\\Downloads\\LOGO SMA_KHADIJAH.png"]]></imageExpression>
+			</image>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="315" y="44" width="362" height="45" uuid="9b064089-beb0-48f1-bf38-1ab78a1aff7c"/>
+				<imageExpression><![CDATA["C:\\Users\\Rifal\\Dropbox\\PC\\Downloads\\SMA KHADIJAH (2).png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="240" y="92" width="525" height="20" uuid="00bd2bb7-8ee9-4e6a-a139-e24547aab752"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Jl. Achmad Yani No.2-4, Wonokromo, Kec. Wonokromo, Surabaya, Jawa Timur 60243]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="0" width="525" height="30" uuid="ef4ec0fd-33f4-41e4-8d75-8cea31c4edbe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Laporan Pengembalian Buku Perpustakaan]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-21" y="122" width="1001" height="1" uuid="d5bc34d6-4299-47d9-96f7-85cd844fc751"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="100" height="20" backcolor="#00CC66" uuid="2ebc9ff2-797b-4a57-83b0-ba9027f68978"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID Pengembalian]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="100" y="0" width="100" height="20" backcolor="#00CC66" uuid="6116535a-1b14-46e4-a8d8-b7fbb4628830"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Penjaga]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="300" y="0" width="148" height="20" backcolor="#00CC66" uuid="216817ec-56bf-4e96-9c2e-d878b4c0e228"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal Dikembalikan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="554" y="0" width="306" height="20" backcolor="#00CC66" uuid="d6456bed-1cc3-4fd7-85f2-88ca30d2de06"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Judul Buku]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="860" y="0" width="100" height="20" backcolor="#00CC66" uuid="f77d524a-6f3a-4963-99d1-ddd96f7f65b6"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Denda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="448" y="0" width="106" height="20" backcolor="#00CC66" uuid="b93e9378-958f-4265-a607-8ac59349e612"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID Buku]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="200" y="0" width="100" height="20" backcolor="#00CC66" uuid="d3b208d1-1a5d-4a5b-b822-f358f31a0939"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Peminjam]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="d43da70e-2022-47d8-827e-c71d10d3b4ec"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID_PENGEMBALIAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="f333ee41-d716-4db1-bfa0-0788ca373f5f"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID_PENJAGA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="20" uuid="05ce5421-2b93-41ce-a21d-742cf348fa86"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NAMA_ANGGOTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="148" height="20" uuid="c80d0cf7-0871-42ea-8e2e-bcc407e20546"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TANGGAL_DIKEMBALIKAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="860" y="0" width="100" height="20" uuid="5de7c4ab-dfcc-40d9-aaac-2cd0dc82af57"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SUBTOTAL_DENDA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="448" y="0" width="106" height="20" uuid="e9126607-c815-40b3-9f1a-5686214e843c"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID_BUKU}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="554" y="0" width="306" height="20" uuid="0246c776-daa6-429c-b87a-75c844ed06fc"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{JUDUL_BUKU}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="50">
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="0" y="30" width="200" height="20" uuid="1e5cc559-f55e-4406-b7ed-2b492066ea72"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="839" y="30" width="80" height="20" uuid="075e541e-a9e0-4a86-95fd-46efb1616958"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="919" y="30" width="40" height="20" uuid="560da3d7-e050-4bbd-813e-d16539ddac14"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="102" splitType="Stretch">
+			<staticText>
+				<reportElement x="677" y="74" width="155" height="20" uuid="245d6b62-be78-474c-a143-0469c10855b7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Denda:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="859" y="74" width="100" height="20" uuid="fef2d287-51ca-4a13-8028-4f67d7522e8e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUBTOTAL_DENDA_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="677" y="25" width="155" height="20" uuid="3a93e142-da62-4dee-8bf0-a817c8c30ef2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jumlah Pengembalian:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="859" y="25" width="100" height="20" uuid="3305e060-358a-4000-9059-a17ab854d1c8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ID_PENGEMBALIAN_3}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="677" y="49" width="155" height="20" uuid="12af4178-1494-439f-9c56-bbedf621d16c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Buku Dikembalikan:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="859" y="49" width="100" height="20" uuid="832de76f-7879-45cd-878c-396cbb870c01"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{ID_BUKU_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
